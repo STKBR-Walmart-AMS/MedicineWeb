@@ -7,15 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Incident")
+@Table(name = "Incident", uniqueConstraints = @UniqueConstraint(columnNames = { "incidentNumber" }))
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Incident implements Serializable {
 
 	/**
@@ -125,7 +128,7 @@ public class Incident implements Serializable {
 
 	@Size(min = 1, max = 25)
 	private String createdBy; // 300617700
-	
+
 	@Size(min = 1, max = 50)
 	private String customer; // 303530000
 
@@ -347,63 +350,31 @@ public class Incident implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((ProductCategorizationTier1 == null) ? 0
-						: ProductCategorizationTier1.hashCode());
-		result = prime
-				* result
-				+ ((ProductCategorizationTier2 == null) ? 0
-						: ProductCategorizationTier2.hashCode());
-		result = prime
-				* result
-				+ ((categorizationTier1 == null) ? 0 : categorizationTier1
-						.hashCode());
-		result = prime
-				* result
-				+ ((categorizationTier2 == null) ? 0 : categorizationTier2
-						.hashCode());
+		result = prime * result + ((ProductCategorizationTier1 == null) ? 0 : ProductCategorizationTier1.hashCode());
+		result = prime * result + ((ProductCategorizationTier2 == null) ? 0 : ProductCategorizationTier2.hashCode());
+		result = prime * result + ((categorizationTier1 == null) ? 0 : categorizationTier1.hashCode());
+		result = prime * result + ((categorizationTier2 == null) ? 0 : categorizationTier2.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
-		result = prime * result
-				+ ((contactCompany == null) ? 0 : contactCompany.hashCode());
-		result = prime * result
-				+ ((createdBy == null) ? 0 : createdBy.hashCode());
-		result = prime * result
-				+ ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((contactCompany == null) ? 0 : contactCompany.hashCode());
+		result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((entryId == null) ? 0 : entryId.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result
-				+ ((fullName == null) ? 0 : fullName.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
 		result = prime * result + ((impact == null) ? 0 : impact.hashCode());
-		result = prime * result
-				+ ((incidentNumber == null) ? 0 : incidentNumber.hashCode());
-		result = prime * result
-				+ ((lastModifiedBy == null) ? 0 : lastModifiedBy.hashCode());
-		result = prime
-				* result
-				+ ((lastModifiedDate == null) ? 0 : lastModifiedDate.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result
-				+ ((priority == null) ? 0 : priority.hashCode());
-		result = prime
-				* result
-				+ ((productCategorizationTier3 == null) ? 0
-						: productCategorizationTier3.hashCode());
-		result = prime * result
-				+ ((serviceType == null) ? 0 : serviceType.hashCode());
+		result = prime * result + ((incidentNumber == null) ? 0 : incidentNumber.hashCode());
+		result = prime * result + ((lastModifiedBy == null) ? 0 : lastModifiedBy.hashCode());
+		result = prime * result + ((lastModifiedDate == null) ? 0 : lastModifiedDate.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
+		result = prime * result + ((productCategorizationTier3 == null) ? 0 : productCategorizationTier3.hashCode());
+		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result
-				+ ((submitDate == null) ? 0 : submitDate.hashCode());
-		result = prime * result
-				+ ((submitter == null) ? 0 : submitter.hashCode());
-		result = prime * result
-				+ ((template == null) ? 0 : template.hashCode());
+		result = prime * result + ((submitDate == null) ? 0 : submitDate.hashCode());
+		result = prime * result + ((submitter == null) ? 0 : submitter.hashCode());
+		result = prime * result + ((template == null) ? 0 : template.hashCode());
 		result = prime * result + ((urgency == null) ? 0 : urgency.hashCode());
 		return result;
 	}
@@ -420,14 +391,12 @@ public class Incident implements Serializable {
 		if (ProductCategorizationTier1 == null) {
 			if (other.ProductCategorizationTier1 != null)
 				return false;
-		} else if (!ProductCategorizationTier1
-				.equals(other.ProductCategorizationTier1))
+		} else if (!ProductCategorizationTier1.equals(other.ProductCategorizationTier1))
 			return false;
 		if (ProductCategorizationTier2 == null) {
 			if (other.ProductCategorizationTier2 != null)
 				return false;
-		} else if (!ProductCategorizationTier2
-				.equals(other.ProductCategorizationTier2))
+		} else if (!ProductCategorizationTier2.equals(other.ProductCategorizationTier2))
 			return false;
 		if (categorizationTier1 == null) {
 			if (other.categorizationTier1 != null)
@@ -517,8 +486,7 @@ public class Incident implements Serializable {
 		if (productCategorizationTier3 == null) {
 			if (other.productCategorizationTier3 != null)
 				return false;
-		} else if (!productCategorizationTier3
-				.equals(other.productCategorizationTier3))
+		} else if (!productCategorizationTier3.equals(other.productCategorizationTier3))
 			return false;
 		if (serviceType == null) {
 			if (other.serviceType != null)
@@ -555,23 +523,16 @@ public class Incident implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Incident [incidentNumber=" + incidentNumber + ", priority="
-				+ priority + ", impact=" + impact + ", urgency=" + urgency
-				+ ", serviceType=" + serviceType + ", contactCompany="
-				+ contactCompany + ", categorizationTier1="
-				+ categorizationTier1 + ", categorizationTier2="
-				+ categorizationTier2 + ", phoneNumber=" + phoneNumber
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", description=" + description
-				+ ", ProductCategorizationTier1=" + ProductCategorizationTier1
-				+ ", ProductCategorizationTier2=" + ProductCategorizationTier2
-				+ ", productCategorizationTier3=" + productCategorizationTier3
-				+ ", entryId=" + entryId + ", submitter=" + submitter
-				+ ", submitDate=" + submitDate + ", template=" + template
-				+ ", lastModifiedBy=" + lastModifiedBy + ", lastModifiedDate="
-				+ lastModifiedDate + ", status=" + status + ", createdBy="
-				+ createdBy + ", customer=" + customer + ", company=" + company
-				+ ", fullName=" + fullName + "]";
+		return "Incident [incidentNumber=" + incidentNumber + ", priority=" + priority + ", impact=" + impact
+				+ ", urgency=" + urgency + ", serviceType=" + serviceType + ", contactCompany=" + contactCompany
+				+ ", categorizationTier1=" + categorizationTier1 + ", categorizationTier2=" + categorizationTier2
+				+ ", phoneNumber=" + phoneNumber + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", description=" + description + ", ProductCategorizationTier1=" + ProductCategorizationTier1
+				+ ", ProductCategorizationTier2=" + ProductCategorizationTier2 + ", productCategorizationTier3="
+				+ productCategorizationTier3 + ", entryId=" + entryId + ", submitter=" + submitter + ", submitDate="
+				+ submitDate + ", template=" + template + ", lastModifiedBy=" + lastModifiedBy + ", lastModifiedDate="
+				+ lastModifiedDate + ", status=" + status + ", createdBy=" + createdBy + ", customer=" + customer
+				+ ", company=" + company + ", fullName=" + fullName + "]";
 	}
 
 }

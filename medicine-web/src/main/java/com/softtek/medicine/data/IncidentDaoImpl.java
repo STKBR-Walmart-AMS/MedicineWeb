@@ -1,6 +1,7 @@
 package com.softtek.medicine.data;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,12 +19,6 @@ public class IncidentDaoImpl implements IncidentDao {
 	private EntityManager em;
 
 	@Override
-	public String insertIncidents(Incident incident) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Incident> getAllIncidents() {
 		// TODO Auto-generated method stub
 		return null;
@@ -33,6 +28,32 @@ public class IncidentDaoImpl implements IncidentDao {
 	public List<Incident> getIncidentsByFilters(HashMap<Object, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String saveOrUpdateIncident(Incident incident) {
+		try {
+			em.persist(incident);
+		} catch (Exception e) {
+			return "error";
+		}
+
+		return "OK";
+	}
+
+	@Override
+	public String saveOrUpdateIncidents(List<Incident> incidentList) {
+
+		for (Iterator<Incident> it = incidentList.iterator(); it.hasNext();) {
+			Incident incident = it.next();
+
+			em.persist(incident);
+			em.flush();
+			em.clear();
+		}
+
+		em.persist(incidentList);
+		return "OK";
 	}
 
 }
