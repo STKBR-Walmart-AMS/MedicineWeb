@@ -34,7 +34,7 @@ public class Util {
 		this.user = user;
 		this.pass = pass;
 		this.ctx = this.login(this.user, this.pass);
-		 queryEntrysByQual();
+//      queryEntrysByQual();
 		this.cleanup();
 		return map;
 
@@ -64,9 +64,6 @@ public class Util {
 		System.out.println("User logged out.");
 	}
 
-	
-	
-	
 
 	public void queryEntrysByQual() {
 		List<Entry> entryList = new ArrayList<Entry>();
@@ -136,7 +133,9 @@ public class Util {
 					incident.setProductCategorizationTier3(list[15] == null ? null : list[15].toString()); // 200000005
 					/* mandatory fields */
 					incident.setSubmitter(list[16] == null ? null : list[16].toString()); // 2
-					// TODO VERIFICAR
+					/**
+					 *  TODO VERIFICAR
+					 */
 					// incident.setSubmitDate(list[17]==null?null: new
 					// Date(Long.parseLong(list[17].toString()))); // 3
 

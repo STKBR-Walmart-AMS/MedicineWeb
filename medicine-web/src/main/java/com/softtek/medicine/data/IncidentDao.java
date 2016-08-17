@@ -7,10 +7,12 @@ import com.softtek.medicine.model.Incident;
 
 public interface IncidentDao {
 
-	String insertIncidents(Incident incident);
-
 	List<Incident> getAllIncidents();
 
 	List<Incident> getIncidentsByFilters(HashMap<Object, Object> map);
+
+	String saveOrUpdateIncident(Incident incident);
+
+	String saveOrUpdateIncidents(List<Incident> incidentList);
 
 }
