@@ -30,42 +30,13 @@
 	<div id="container">
 		<h1>Welcome to Medicine!</h1>
 
-		<div>
-			<p>You have successfully deployed a basic SpringMVC web
-				application.</p>
+		<div >
+			<c:out value="${msg}"/>
 		</div>
-
-		<form:form commandName="newMember" id="reg">
-				<h2>Member Registration</h2>
-
-				<p>Enforces annotation-based constraints defined on the model
-					class.</p>
-				<table>
-					<tbody>
-						<tr>
-							<td><form:label path="name">Name:</form:label></td>
-							<td><form:input path="name" /></td>
-							<td><form:errors class="invalid" path="name" /></td>
-						</tr>
-						<tr>
-							<td><form:label path="password">password:</form:label></td>
-							<td><form:input path="password" /></td>
-							<td><form:errors class="invalid" path="password" /></td>
-						</tr>
-
-						<tr>
-							<td><p style="color: red">${error}</p></td>
-						</tr>
-					</tbody>
-				</table>
-				<table>
-					<tr>
-						<td><input type="submit" value="Register" class="register" />
-							<input type="reset" value="Cancel" class="cancel" /></td>
-					</tr>
-				</table>
-			</form:form>
+		
 		<h2>Incidents</h2>
+		
+		
 		<c:choose>
 			<c:when test="${incidents.size()==0}">
 				<em>No registered Incidents.</em>

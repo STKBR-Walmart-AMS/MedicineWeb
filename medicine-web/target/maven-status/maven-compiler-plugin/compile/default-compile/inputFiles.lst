@@ -1,8 +1,10 @@
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\data\IncidentDao.java
-C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\controller\MemberController.java
+C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\service\MedicineService.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\controller\IncidentRestController.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\model\Incident.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\data\MemberDao.java
+C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\service\MedicineServiceImpl.java
+C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\controller\IncidentController.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\model\RemedyUser.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\data\IncidentDaoImpl.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\model\Member.java
@@ -10,6 +12,5 @@ C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softt
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\util\GeraTabelas.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\data\MemberDaoImpl.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\util\Util.java
-C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\dto\IncidentDto.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\controller\MemberRestController.java
 C:\Users\ariane.dutra\workspace\MedicineWeb\medicine-web\src\main\java\com\softtek\medicine\util\ErrorTreatment.java
