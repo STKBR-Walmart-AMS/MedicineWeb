@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.softtek.medicine.data.IncidentDao;
 import com.softtek.medicine.model.Incident;
-import com.softtek.medicine.service.MedicineService;
 
 @RestController
 public class IncidentRestController {
 	
 	@Autowired
-	private MedicineService medicineService;
+	private IncidentDao incidentDao;
 
 	@RequestMapping(value = "/incident", method = RequestMethod.GET, produces = "text/plain")
 	public String Bla() {
@@ -34,7 +34,7 @@ public class IncidentRestController {
 		
 		HttpHeaders headers = new HttpHeaders();
 				
-		String status = medicineService.saveOrUpdateIncidents(incidentList);
+		String status = incidentDao.saveOrUpdateIncidents(incidentList);
 				
 		UriComponents uriComponents = ucBuilder.path("/{msg}").buildAndExpand(status);
 	    headers.setLocation(uriComponents.toUri());
@@ -42,4 +42,13 @@ public class IncidentRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 
 	}
+	
+	 @RequestMapping(value="/incidents",method = RequestMethod.GET,headers="Accept=application/json")
+	 public List<Incident> getAllIncidents() {	 
+	  List<Incident> incident=incidentDao.getAllIncidents();
+	  return incident;
+	
+	 }
+	
+	
 }

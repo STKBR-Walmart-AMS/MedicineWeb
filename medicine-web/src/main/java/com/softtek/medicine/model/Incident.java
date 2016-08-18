@@ -15,7 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
-
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name = "Incident", uniqueConstraints = @UniqueConstraint(columnNames = { "incidentNumber" }))
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
