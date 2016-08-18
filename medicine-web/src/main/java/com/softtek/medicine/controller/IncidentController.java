@@ -17,63 +17,67 @@
 package com.softtek.medicine.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.validation.Valid;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.softtek.medicine.data.IncidentDao;
 import com.softtek.medicine.model.Incident;
-import com.softtek.medicine.model.RemedyUser;
-import com.softtek.medicine.util.Util;
 
 @Controller
 @RequestMapping(value = "/")
-public class MemberController {
-	// @Autowired
-	// private MemberDao memberDao;
+public class IncidentController {
 
-	private Util utils = new Util();
-	List<Incident> lstIncident = new ArrayList<Incident>();
+	@Autowired
+	private IncidentDao incidentDao;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String displaySortedMembers(Model model) {
-		model.addAttribute("newMember", new RemedyUser());
-		// model.addAttribute("members", memberDao.findAllOrderedByName());
-		return "index";
-	}
+	public String listAllIncidents(Model model) {
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String registerNewMember(@Valid @ModelAttribute("newMember") RemedyUser newMember, BindingResult result,
-			Model model) {
-		if (!result.hasErrors()) {
+		List<Incident> incidentList = new ArrayList<Incident>();
+		//incidentList = incidentDao.getAllIncidents();
 
-			HashMap<Object, Object> map = new HashMap<Object, Object>();
-
-			map = utils.getRemedyList(newMember.getName(), newMember.getPassword());
-
-			if (map.containsKey("error")) {
-				model.addAttribute("error", map.get("error"));
-				return "index";
-			} else if (map.containsKey("incidentList")) {
-				lstIncident.add((Incident) map.get("incidentList"));
-			} else {
-				model.addAttribute("error", "Lista vazia!");
-				return "index";
-			}
-			return "redirect:/";
-
-		} else
-
-		{
-			return "index";
+		if (!incidentList.isEmpty()) {
+			model.addAttribute("incidents", incidentList);
+		} else {
+			model.addAttribute("error", "No data");
 		}
+
+		return "redirect:/";
+
+		// return "index";
 	}
+
+	// @RequestMapping(method = RequestMethod.POST)
+	// public String registerNewMember(@Valid @ModelAttribute("newMember")
+	// RemedyUser newMember, BindingResult result,
+	// Model model) {
+	// if (!result.hasErrors()) {
+	//
+	// HashMap<Object, Object> map = new HashMap<Object, Object>();
+	//
+	// map = utils.getRemedyList(newMember.getName(), newMember.getPassword());
+	//
+	// if (map.containsKey("error")) {
+	// model.addAttribute("error", map.get("error"));
+	// return "index";
+	// } else if (map.containsKey("incidentList")) {
+	// lstIncident.add((Incident) map.get("incidentList"));
+	// } else {
+	// model.addAttribute("error", "Lista vazia!");
+	// return "index";
+	// }
+	// return "redirect:/";
+	//
+	// } else
+	//
+	// {
+	// return "index";
+	// }
+	// }
 
 }
