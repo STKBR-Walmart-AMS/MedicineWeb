@@ -14,5 +14,7 @@ public interface IncidentDao {
 	String saveOrUpdateIncident(Incident incident);
 
 	String saveOrUpdateIncidents(List<Incident> incidentList);
+	
+	Incident getIncidentsByIncidentNumber(String incidentNumber);
 
 }

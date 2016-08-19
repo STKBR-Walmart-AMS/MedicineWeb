@@ -16,9 +16,6 @@
  */
 package com.softtek.medicine.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.softtek.medicine.data.IncidentDao;
-import com.softtek.medicine.model.Incident;
 
 @Controller
 @RequestMapping(value = "/")
@@ -37,47 +33,9 @@ public class IncidentController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String listAllIncidents(Model model) {
-
-		List<Incident> incidentList = new ArrayList<Incident>();
-		//incidentList = incidentDao.getAllIncidents();
-
-		if (!incidentList.isEmpty()) {
-			model.addAttribute("incidents", incidentList);
-		} else {
-			model.addAttribute("error", "No data");
-		}
-
-		return "redirect:/";
-
-		// return "index";
+		model.addAttribute("incidents", incidentDao.getAllIncidents());
+		return "index";
 	}
 
-	// @RequestMapping(method = RequestMethod.POST)
-	// public String registerNewMember(@Valid @ModelAttribute("newMember")
-	// RemedyUser newMember, BindingResult result,
-	// Model model) {
-	// if (!result.hasErrors()) {
-	//
-	// HashMap<Object, Object> map = new HashMap<Object, Object>();
-	//
-	// map = utils.getRemedyList(newMember.getName(), newMember.getPassword());
-	//
-	// if (map.containsKey("error")) {
-	// model.addAttribute("error", map.get("error"));
-	// return "index";
-	// } else if (map.containsKey("incidentList")) {
-	// lstIncident.add((Incident) map.get("incidentList"));
-	// } else {
-	// model.addAttribute("error", "Lista vazia!");
-	// return "index";
-	// }
-	// return "redirect:/";
-	//
-	// } else
-	//
-	// {
-	// return "index";
-	// }
-	// }
 
 }

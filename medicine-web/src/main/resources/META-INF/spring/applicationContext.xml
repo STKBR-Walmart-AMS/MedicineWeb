@@ -23,11 +23,8 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-    <context:component-scan base-package="com.softtek.medicine.model" />
-    <context:component-scan base-package="com.softtek.medicine.data" />
-	<context:component-scan base-package="com.softtek.medicine.controller" />  
-	<context:component-scan base-package="com.softtek.medicine.service" />
-
+    <context:component-scan base-package="com.softtek.medicine" />
+   
     <tx:annotation-driven />
 
 </beans>
