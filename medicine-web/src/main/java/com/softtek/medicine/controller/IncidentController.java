@@ -24,18 +24,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.softtek.medicine.data.IncidentDao;
 
-@Controller
-@RequestMapping(value = "/")
-public class IncidentController {
-
-	@Autowired
-	private IncidentDao incidentDao;
-
-	@RequestMapping(method = RequestMethod.GET)
-	public String listAllIncidents(Model model) {
-		model.addAttribute("incidents", incidentDao.getAllIncidents());
-		return "index";
-	}
-
-
-}
+//@Controller
+//@RequestMapping(value = "/")
+//public class IncidentController {
+//
+//	@Autowired
+//	private IncidentDao incidentDao;
+//
+//	@RequestMapping(method = RequestMethod.GET)
+//	public String listAllIncidents(Model model) {
+//		model.addAttribute("incidents", incidentDao.getAllIncidents());
+//		return "index";
+//	}
+//
+//
+//}
