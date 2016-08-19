@@ -17,6 +17,7 @@ import com.softtek.medicine.data.IncidentDao;
 import com.softtek.medicine.model.Incident;
 
 @RestController
+@RequestMapping("/rest")
 public class IncidentRestController {
 	
 	@Autowired
