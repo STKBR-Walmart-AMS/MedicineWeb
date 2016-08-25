@@ -1,40 +1,38 @@
 package com.softtek.medicine.data;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softtek.medicine.model.Incident;
-import com.softtek.medicine.model.Member;
 
 @Repository
 @Transactional
 public class IncidentDaoImpl implements IncidentDao {
-	@Autowired
-	private EntityManager em;
 
-	@Override
+	private static final String PERSISTENCE_UNIT_NAME = "pu_medicine";
+	private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
 	public List<Incident> getAllIncidents() {
-		 CriteriaBuilder cb = em.getCriteriaBuilder();
-	        CriteriaQuery<Incident> criteria = cb.createQuery(Incident.class);
-	        Root<Incident> incident = criteria.from(Incident.class);
-
-	        /*
-	         * Swap criteria statements if you would like to try out type-safe criteria queries, a new
-	         * feature in JPA 2.0 criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
-	         */
-
-	        criteria.select(incident).orderBy(cb.asc(incident.get("priority")));
-	        return em.createQuery(criteria).getResultList();
+		final EntityManager em = factory.createEntityManager();
+		try {
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Incident> criteria = cb.createQuery(Incident.class);
+			Root<Incident> incident = criteria.from(Incident.class);
+			criteria.select(incident).orderBy(cb.asc(incident.get("priority")));
+			return em.createQuery(criteria).getResultList();
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
@@ -42,33 +40,46 @@ public class IncidentDaoImpl implements IncidentDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public Incident getIncidentsByIncidentNumber(String incidentNumber) {
-		
-		
-		
-		 CriteriaBuilder cb = em.getCriteriaBuilder();
-	        CriteriaQuery<Incident> criteria = cb.createQuery(Incident.class);
-	        Root<Incident> incident = criteria.from(Incident.class);
+		final EntityManager em = factory.createEntityManager();
+		try {
 
-	        /*
-	         * Swap criteria statements if you would like to try out type-safe criteria queries, a new
-	         * feature in JPA 2.0 criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
-	         */
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Incident> criteria = cb.createQuery(Incident.class);
+			Root<Incident> incident = criteria.from(Incident.class);
+			criteria.select(incident).where(cb.equal(incident.get("incidentNumber"), incidentNumber));
+			return em.createQuery(criteria).getSingleResult();
+		} finally {
+			em.close();
+		}
 
-	        criteria.select(incident).where(cb.equal(incident.get("incidentNumber"), incidentNumber));
-	        return em.createQuery(criteria).getSingleResult();
-		
 	}
-	
 
 	@Override
-	public String saveOrUpdateIncident(Incident incident) {
+	public String saveIncident(Incident incident) {
+		final EntityManager em = factory.createEntityManager();
 		try {
 			em.persist(incident);
 		} catch (Exception e) {
 			return "error";
+		} finally {
+			em.close();
+		}
+
+		return "OK";
+	}
+
+	@Override
+	public String updateIncident(Incident incident) {
+		final EntityManager em = factory.createEntityManager();
+		try {
+			em.merge(incident);
+		} catch (Exception e) {
+			return "error";
+		} finally {
+			em.close();
 		}
 
 		return "OK";
@@ -77,23 +88,20 @@ public class IncidentDaoImpl implements IncidentDao {
 	@Override
 	public String saveOrUpdateIncidents(List<Incident> incidentList) {
 
-		
-		for(Incident lst: incidentList){
-			
-		}
-		
-		
-		
-		for (Iterator<Incident> it = incidentList.iterator(); it.hasNext();) {
-			Incident incident = it.next();
+		try {
+			for (Incident lst : incidentList) {
+				if (getIncidentsByIncidentNumber(lst.getIncidentNumber()) != null) {
+					updateIncident(lst);
+				} else {
+					saveIncident(lst);
+				}
 
-			em.persist(incident);
-			em.flush();
-			em.clear();
+			}
+		} catch (Exception e) {
+			return "error";
 		}
-
-		em.persist(incidentList);
 		return "OK";
+
 	}
 
 }
