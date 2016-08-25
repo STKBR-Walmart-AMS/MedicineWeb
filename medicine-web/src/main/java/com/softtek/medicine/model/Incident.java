@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
+
 @Component
 @Entity
 @Table(name = "Incident", uniqueConstraints = @UniqueConstraint(columnNames = { "incidentNumber" }))
@@ -138,6 +139,11 @@ public class Incident implements Serializable {
 
 	@Size(min = 1, max = 100)
 	private String fullName; // 1000000017
+
+	public Incident() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getIncidentNumber() {
 		return incidentNumber;
