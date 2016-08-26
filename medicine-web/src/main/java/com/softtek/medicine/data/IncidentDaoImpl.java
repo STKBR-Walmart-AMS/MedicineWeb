@@ -61,7 +61,9 @@ public class IncidentDaoImpl implements IncidentDao {
 	public String saveIncident(Incident incident) {
 		final EntityManager em = factory.createEntityManager();
 		try {
+			em.getTransaction().begin();
 			em.persist(incident);
+			em.getTransaction().commit();
 		} catch (Exception e) {
 			return "error";
 		} finally {
@@ -75,7 +77,9 @@ public class IncidentDaoImpl implements IncidentDao {
 	public String updateIncident(Incident incident) {
 		final EntityManager em = factory.createEntityManager();
 		try {
+			em.getTransaction().begin();
 			em.merge(incident);
+			em.getTransaction().commit();
 		} catch (Exception e) {
 			return "error";
 		} finally {
