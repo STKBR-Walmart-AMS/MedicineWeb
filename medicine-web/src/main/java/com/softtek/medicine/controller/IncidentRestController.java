@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.google.gson.Gson;
 import com.softtek.medicine.data.IncidentDao;
 import com.softtek.medicine.model.Incident;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/dr")
 public class IncidentRestController {
 	
 	@Autowired
@@ -30,7 +31,7 @@ public class IncidentRestController {
 	
 	//-------------------Create an Incident--------------------------------------------------------
 
-	@RequestMapping(value = "/incident/json", method = RequestMethod.POST)
+	@RequestMapping(value = "/incidents/send", method = RequestMethod.POST)
 	public ResponseEntity<Void> getJson(@RequestBody List<Incident> incidentList, UriComponentsBuilder ucBuilder) {
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -44,10 +45,13 @@ public class IncidentRestController {
 
 	}
 	
-	 @RequestMapping(value="/incidents",method = RequestMethod.GET,headers="Accept=application/json")
-	 public List<Incident> getAllIncidents() {	 
+	 @RequestMapping(value="/incidents/request",method = RequestMethod.GET,headers="Accept=application/json")
+	 public String getAllIncidents() {	 
 	  List<Incident> incident=incidentDao.getAllIncidents();
-	  return incident;
+	  Gson list = new Gson();
+	  list.toJson(incident);
+	  
+	  return list.toJson(incident);
 	
 	 }
 	
