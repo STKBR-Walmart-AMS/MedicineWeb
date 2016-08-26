@@ -27,7 +27,6 @@ import com.softtek.medicine.data.IncidentDao;
 @Controller
 @RequestMapping(value = "/")
 public class IncidentController {
-
 	@Autowired
 	private IncidentDao incidentDao;
 
