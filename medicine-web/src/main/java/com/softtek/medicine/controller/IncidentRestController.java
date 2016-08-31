@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -44,6 +45,15 @@ public class IncidentRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 
 	}
+	
+	
+	
+	@RequestMapping(value = "/incidents/update", method = RequestMethod.POST)
+	public @ResponseBody String createEmployee(@RequestBody List<Incident> incidentList) {
+		String status = incidentDao.saveOrUpdateIncidents(incidentList);
+		return status;
+	}
+	
 	
 	 @RequestMapping(value="/incidents/request",method = RequestMethod.GET,headers="Accept=application/json")
 	 public String getAllIncidents() {	 

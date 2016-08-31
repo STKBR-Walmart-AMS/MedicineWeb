@@ -17,6 +17,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 @Component
 @Entity
 @Table(name = "Incident", uniqueConstraints = @UniqueConstraint(columnNames = { "incidentNumber" }))
@@ -31,6 +34,8 @@ public class Incident implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	private Date createdDate;
 
 	/* mandatory fields */
 	@NotNull
@@ -144,6 +149,27 @@ public class Incident implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonSerialize(using=DateSerializer.class)
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
 
 	public String getIncidentNumber() {
 		return incidentNumber;
